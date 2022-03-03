@@ -1,4 +1,4 @@
-package rest.test;
+package test;
 
 
 import org.junit.Test;
@@ -6,16 +6,16 @@ import org.junit.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class OlaMundoTest {
+public class HelloWorldTest {
     @Test
     public void validarLabelOlaMundo() {
         given()
                 .when()
-                    .get("https://restapi.wcaquino.me/ola")
+                .get("https://restapi.wcaquino.me/ola")
 
-        .then()
-            .body(is("Ola Mundo!"))
-            .body(not(nullValue()));
+                .then()
+                .body(is("Ola Mundo!"))
+                .body(not(nullValue()));
     }
 
     @Test

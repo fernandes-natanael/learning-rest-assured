@@ -1,11 +1,11 @@
-package rest.test;
+package test;
 
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class UserJSONTest {
+public class UserJsonTest {
 
     @Test
     public void verificaUsuario_primeiroNivel_JSON() {
@@ -46,17 +46,17 @@ public class UserJSONTest {
                 .body("filhos[0].name", is("Zezinho"))
                 .body("filhos[1].name", is("Luizinho"));
         /* ou podera ser feito
-        * .body("filhos.name", hasItems("Zezinho", "Luizinho"))
-        * */
+         * .body("filhos.name", hasItems("Zezinho", "Luizinho"))
+         * */
     }
 
     @Test
     public void verificaUsuarioInexistente_JSON() {
         given()
                 .when()
-                    .get("https://restapi.wcaquino.me/users/4")
+                .get("https://restapi.wcaquino.me/users/4")
                 .then()
-                    .statusCode(404);// 404 codigo retornado quando o conteudo nao eh encontrado
+                .statusCode(404);// 404 codigo retornado quando o conteudo nao eh encontrado
 
     }
 
@@ -68,6 +68,6 @@ public class UserJSONTest {
                 .then().statusCode(200)
                 .body("$", hasSize(3));
     }
-    
-    
+
+
 }

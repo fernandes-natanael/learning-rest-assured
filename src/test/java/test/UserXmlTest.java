@@ -1,11 +1,11 @@
-package rest.test;
+package test;
 
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class UserXMLTest {
+public class UserXmlTest {
 
     @Test
     public void dadosUsuarioXML() {
