@@ -73,7 +73,7 @@ public class AuthTest {
                 .log().all()
                 .auth().basic("admin", "senha")
                 .when()
-                .get("https://restapi.wcaquino.me/basicauth2")
+                .get("https://restapi.wcaquino.me/basicauth")
                 .then()
                 .log().all()
                 .statusCode(200)
