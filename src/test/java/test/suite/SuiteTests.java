@@ -1,9 +1,14 @@
-package test;
+package test.suite;
 
 import base.Core;
-import constants.DataTransaction;
 import io.restassured.RestAssured;
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import test.AccountBalanceTest;
+import test.AccountTest;
+import test.AuthTest;
+import test.TransactionTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,9 +16,16 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class AccountTestRefac extends Core implements DataTransaction {
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        AccountTest.class,
+        TransactionTest.class,
+        AccountBalanceTest.class,
+        AuthTest.class,
+})
+public class SuiteTests extends Core {
     @BeforeClass
-    public static void login_reset() {
+    public static void login(){
         Map<String, String> login = new HashMap<>();
         login.put("email", USER_EMAIL);
         login.put("senha", USER_PASSWORD);
@@ -29,7 +41,7 @@ public class AccountTestRefac extends Core implements DataTransaction {
                 .extract().path("token");
 
         RestAssured.requestSpecification.header("Authorization", "JWT " + TOKEN);
-        RestAssured.get("/reset").then().statusCode(STATUS_SUCCEED);
-    }
 
+        RestAssured.get(PATH_RESET).then().statusCode(STATUS_SUCCEED);
+    }
 }

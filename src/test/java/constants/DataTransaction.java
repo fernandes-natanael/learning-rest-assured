@@ -7,6 +7,4 @@ public interface DataTransaction {
     String TRANSACTION_DAY = "05/02/2022";
     String PAY_DAY ="10/02/2022";
     Float VALUE = 100.00F;
-
-
 }

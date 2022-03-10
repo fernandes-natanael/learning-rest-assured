@@ -4,7 +4,6 @@ import constants.Constants;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class Core implements Constants {
-
+    public static String TOKEN;
     @BeforeClass
     public static void setup() {
         RestAssured.baseURI = APP_URL;
@@ -31,22 +30,4 @@ public class Core implements Constants {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    @BeforeClass
-    public static void login(){
-        Map<String, String> login = new HashMap<>();
-        login.put("email", USER_EMAIL);
-        login.put("senha", USER_PASSWORD);
-
-        String TOKEN = given()
-                .body(login)
-                .when()
-                .post(PATH_SIGNIN)
-                .then()
-                .statusCode(STATUS_SUCCEED) // Request Succeed
-                .body("id", is(USER_ID))
-                .body("nome", is(USER_NAME))
-                .extract().path("token");
-
-        RestAssured.requestSpecification.header("Authorization", "JWT " + TOKEN);
-    }
 }
